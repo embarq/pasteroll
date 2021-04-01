@@ -1,18 +1,17 @@
 import { none, useHookstate } from '@hookstate/core'
-import { IonButton, IonButtons, IonCol, IonContent, IonHeader, IonIcon, IonList, IonPage, IonRow, IonTitle, IonToast, IonToolbar } from '@ionic/react'
+import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonList, IonPage, IonTitle, IonToast, IonToolbar } from '@ionic/react'
 import { useState } from 'react';
 import {
   arrowUndoOutline,
   ellipsisVerticalOutline,
 } from 'ionicons/icons'
+import { Plugins } from '@capacitor/core'
 import ClipboardItemsListItem from '../components/ClipboardItemsLIstItem';
-import ClipboardNotSupported from '../components/ClipboardNotSupported';
-import { ClipboardAvailable, ClipboardItems } from '../lib/state'
+import { ClipboardItems } from '../lib/state'
 import { ClipboardItem } from '../model';
 import './Home.css'
 
 const Home: React.FC = () => {
-  const clipboardAvailable = useHookstate(ClipboardAvailable)
   const items = useHookstate(ClipboardItems)
   const [showUndoToast, setShowUndoToast] = useState(false)
   const [showCopiedToast, setShowCopiedToast] = useState(false)
@@ -24,14 +23,12 @@ const Home: React.FC = () => {
     ))
 
   function handleItemClick(itemId: string) {
-    if (!clipboardAvailable.value) {
-      return;
-    }
-
     const item = items.find(item => item.value.id === itemId)
 
     if (item != null) {
-      navigator.clipboard.writeText(item.content.value);
+      Plugins.Clipboard.write({
+        string: item.content.value
+      })
       setShowCopiedToast(true)
     }
   }
@@ -49,7 +46,7 @@ const Home: React.FC = () => {
 
   function undoRemoveItem() {
     if (removedItem != null) {
-      items.merge([ removedItem ])
+      items.merge([removedItem])
       setRemovedItem(null)
     }
   }
@@ -66,17 +63,11 @@ const Home: React.FC = () => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>{
-        !clipboardAvailable.value
-          ? (
-            <IonRow>
-              <IonCol size="12" sizeSm="4" offsetSm="4">
-                <ClipboardNotSupported />
-              </IonCol>
-            </IonRow>
-          )
-          : items.length > 0 && <IonList>{listItems}</IonList>
-      }</IonContent>
+      <IonContent fullscreen>
+        {
+          items.length > 0 && <IonList>{listItems}</IonList>
+        }
+      </IonContent>
       <IonToast
         isOpen={showUndoToast}
         duration={5000}
