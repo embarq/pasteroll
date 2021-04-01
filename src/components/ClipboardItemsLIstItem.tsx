@@ -1,9 +1,7 @@
-import { useHookstate } from "@hookstate/core";
 import { IonBadge, IonButton, IonIcon, IonItem } from "@ionic/react";
 import { trashBinOutline } from 'ionicons/icons'
-import { MouseEventHandler, SyntheticEvent } from "react";
+import { MouseEventHandler } from "react";
 import { formatDateTime } from "../lib/format-date-time";
-import { ClipboardAvailable } from "../lib/state";
 import { isFunction } from "../lib/utils";
 import { ClipboardItem } from "../model";
 
