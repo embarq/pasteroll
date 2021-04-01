@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "pasteroll",
+  "appId": "io.embarq.pasteroll",
+  "appName": "Pasteroll",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",

@@ -1,40 +1,61 @@
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import { Redirect, Route } from 'react-router-dom'
+import { IonApp, IonContent, IonFab, IonItem, IonList, IonMenu, IonRouterOutlet } from '@ionic/react'
+import { IonReactRouter } from '@ionic/react-router'
+import Home from './pages/Home'
 
-/* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
+import './styles'
+import PasteButton from './components/PasteButton'
+import { useEffect, useState } from 'react'
+import { useHookstate } from '@hookstate/core'
+import { ClipboardAvailable } from './lib/state'
 
-/* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
+const App: React.FC = () => {
+  const clipboardAvailable = useHookstate(ClipboardAvailable)
 
-/* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
+  useEffect(() => {
+    if (clipboardAvailable.value === false && typeof navigator.permissions !== 'undefined') {
+      const results = Promise.all([
+        navigator.permissions.query({ name: 'clipboard-read' }),
+        navigator.permissions.query({ name: 'clipboard-write' }),
+      ])
 
-/* Theme variables */
-import './theme/variables.css';
+      results
+        .then(statuses => statuses.every(status => status.state === 'granted'))
+        .then(isClipboardAvailable =>
+          isClipboardAvailable && clipboardAvailable.set(isClipboardAvailable)
+        )
+    }
+  }, [])
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+  return (
+    <IonApp>
+      <IonMenu>
+        <IonContent>
+          <IonList>
+            <IonItem>
+              What's up?
+            </IonItem>
+          </IonList>
+        </IonContent>
+      </IonMenu>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
+        </IonRouterOutlet>
+      </IonReactRouter>
+      {clipboardAvailable.value && (
+        <IonFab vertical="bottom" horizontal="end" slot="fixed">
+          <PasteButton />
+        </IonFab>
+      )}
+
+    </IonApp>
+  )
+}
 
 export default App;
