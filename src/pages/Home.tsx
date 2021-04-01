@@ -1,14 +1,14 @@
 import { none, useHookstate } from '@hookstate/core'
 import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonList, IonPage, IonTitle, IonToast, IonToolbar } from '@ionic/react'
-import { useState } from 'react';
+import { useState } from 'react'
 import {
   arrowUndoOutline,
-  ellipsisVerticalOutline,
+  ellipsisVerticalOutline
 } from 'ionicons/icons'
 import { Plugins } from '@capacitor/core'
-import ClipboardItemsListItem from '../components/ClipboardItemsLIstItem';
+import ClipboardItemsListItem from '../components/ClipboardItemsLIstItem'
 import { ClipboardItems } from '../lib/state'
-import { ClipboardItem } from '../model';
+import { ClipboardItem } from '../model'
 import './Home.css'
 
 const Home: React.FC = () => {
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
       <ClipboardItemsListItem key={item.id} item={item} onRemove={handleRemove} onClick={handleItemClick} />
     ))
 
-  function handleItemClick(itemId: string) {
+  function handleItemClick (itemId: string) {
     const item = items.find(item => item.value.id === itemId)
 
     if (item != null) {
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
     }
   }
 
-  function handleRemove(itemId: string) {
+  function handleRemove (itemId: string) {
     const ix = items.findIndex(item => item.value.id === itemId)
 
     if (ix > -1) {
@@ -44,7 +44,7 @@ const Home: React.FC = () => {
     }
   }
 
-  function undoRemoveItem() {
+  function undoRemoveItem () {
     if (removedItem != null) {
       items.merge([removedItem])
       setRemovedItem(null)
@@ -56,9 +56,9 @@ const Home: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>💾 Pasteroll</IonTitle>
-          <IonButtons slot="end">
-            <IonButton color="dark">
-              <IonIcon icon={ellipsisVerticalOutline} slot="icon-only"></IonIcon>
+          <IonButtons slot='end'>
+            <IonButton color='dark'>
+              <IonIcon icon={ellipsisVerticalOutline} slot='icon-only' />
             </IonButton>
           </IonButtons>
         </IonToolbar>
@@ -71,8 +71,8 @@ const Home: React.FC = () => {
       <IonToast
         isOpen={showUndoToast}
         duration={5000}
-        position="top"
-        message="Item removed"
+        position='top'
+        message='Item removed'
         onDidDismiss={() => setShowUndoToast(false)}
         buttons={[
           {
@@ -85,21 +85,23 @@ const Home: React.FC = () => {
             text: 'Ok',
             role: 'cancel'
           }
-        ]} />
+        ]}
+      />
       <IonToast
         isOpen={showCopiedToast}
         duration={3000}
-        position="top"
-        message="Copied 💾"
+        position='top'
+        message='Copied 💾'
         onDidDismiss={() => setShowCopiedToast(false)}
         buttons={[
           {
             text: 'Ok',
             role: 'cancel'
           }
-        ]} />
+        ]}
+      />
     </IonPage>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

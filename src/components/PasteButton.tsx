@@ -1,32 +1,31 @@
-import { useHookstate } from '@hookstate/core';
-import { IonFabButton, IonIcon } from '@ionic/react';
+import { useHookstate } from '@hookstate/core'
+import { IonFabButton, IonIcon } from '@ionic/react'
 import { clipboardOutline } from 'ionicons/icons'
 import { nanoid } from 'nanoid'
 import { Plugins } from '@capacitor/core'
-import { ClipboardItems } from '../lib/state';
-import { isString } from '../lib/utils';
+import { ClipboardItems } from '../lib/state'
+import { isString } from '../lib/utils'
 
 const PasteButton: React.FC = () => {
   const items = useHookstate(ClipboardItems)
 
-  function handleClick() {
+  function handleClick () {
     Plugins.Clipboard.read().then(result => {
       if (isString(result.value)) {
         items.merge([
           {
             id: nanoid(),
             content: result.value,
-            created_at: Date.now(),
+            created_at: Date.now()
           }
         ])
       }
     })
-
   }
 
   return (
     <IonFabButton onClick={handleClick}>
-      <IonIcon icon={clipboardOutline}></IonIcon>
+      <IonIcon icon={clipboardOutline} />
     </IonFabButton>
   )
 }

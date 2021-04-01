@@ -20,15 +20,15 @@ const App: React.FC = () => {
       </IonMenu>
       <IonReactRouter>
         <IonRouterOutlet>
-          <Route exact path="/home">
+          <Route exact path='/home'>
             <Home />
           </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
+          <Route exact path='/'>
+            <Redirect to='/home' />
           </Route>
         </IonRouterOutlet>
       </IonReactRouter>
-      <IonFab vertical="bottom" horizontal="end" slot="fixed">
+      <IonFab vertical='bottom' horizontal='end' slot='fixed'>
         <PasteButton />
       </IonFab>
 
@@ -36,4 +36,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App;
+export default App

@@ -1,4 +1,4 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCardTitle } from "@ionic/react";
+import { IonCard, IonCardContent, IonCardHeader, IonCardTitle } from '@ionic/react'
 
 const ClipboardNotSupported: React.FC = () => (
   <IonCard>

@@ -1,11 +1,11 @@
-import { IonBadge, IonButton, IonIcon, IonItem } from "@ionic/react";
+import { IonBadge, IonButton, IonIcon, IonItem } from '@ionic/react'
 import { trashBinOutline } from 'ionicons/icons'
-import { MouseEventHandler } from "react";
-import { formatDateTime } from "../lib/format-date-time";
-import { isFunction } from "../lib/utils";
-import { ClipboardItem } from "../model";
+import { MouseEventHandler } from 'react'
+import { formatDateTime } from '../lib/format-date-time'
+import { isFunction } from '../lib/utils'
+import { ClipboardItem } from '../model'
 
-type ClipboardItemsListItemProps = {
+interface ClipboardItemsListItemProps {
   item: ClipboardItem
   onRemove?: (itemId: string) => any
   onClick?: (itemId: string) => any
@@ -24,13 +24,13 @@ const ClipboardItemsListItem: React.FC<ClipboardItemsListItemProps> = ({ item, o
     <IonItem onClick={handleClick}>
       <article>
         <p>{item.content}</p>
-        <IonBadge color="light">
+        <IonBadge color='light'>
           {formatDateTime(item.created_at)}
         </IonBadge>
       </article>
-  
-      <IonButton onClick={() => isFunction(onRemove) && onRemove(item.id)} slot="end" color="drak" fill="clear" class="remove-button">
-        <IonIcon icon={trashBinOutline} color="danger" slot="icon-only"></IonIcon>
+
+      <IonButton onClick={() => isFunction(onRemove) && onRemove(item.id)} slot='end' color='drak' fill='clear' class='remove-button'>
+        <IonIcon icon={trashBinOutline} color='danger' slot='icon-only' />
       </IonButton>
     </IonItem>
   )
