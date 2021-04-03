@@ -9,7 +9,7 @@ import { isString } from '../lib/utils'
 const PasteButton: React.FC = () => {
   const items = useHookstate(ClipboardItems)
 
-  async function handleClick (): Promise<void> {
+  async function handleClick(): Promise<void> {
     const { value } = await Plugins.Clipboard.read()
 
     if (isString(value)) {
@@ -17,8 +17,8 @@ const PasteButton: React.FC = () => {
         {
           id: nanoid(),
           content: value,
-          created_at: Date.now()
-        }
+          created_at: Date.now(),
+        },
       ])
     }
   }

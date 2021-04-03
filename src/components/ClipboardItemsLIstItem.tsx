@@ -11,9 +11,15 @@ interface ClipboardItemsListItemProps {
   onClick?: (itemId: string) => unknown
 }
 
-const ClipboardItemsListItem: React.FC<ClipboardItemsListItemProps> = ({ item, onRemove, onClick }: ClipboardItemsListItemProps) => {
+const ClipboardItemsListItem: React.FC<ClipboardItemsListItemProps> = ({
+  item,
+  onRemove,
+  onClick,
+}: ClipboardItemsListItemProps) => {
   const handleClick: MouseEventHandler<HTMLIonItemElement> = (event) => {
-    const isRemoveBtnClick = (event.target as HTMLElement).classList.contains('remove-button')
+    const isRemoveBtnClick = (event.target as HTMLElement).classList.contains(
+      'remove-button'
+    )
 
     if (isFunction(onClick) && !isRemoveBtnClick) {
       onClick(item.id)
@@ -24,13 +30,16 @@ const ClipboardItemsListItem: React.FC<ClipboardItemsListItemProps> = ({ item, o
     <IonItem onClick={handleClick}>
       <article>
         <p>{item.content}</p>
-        <IonBadge color='light'>
-          {formatDateTime(item.created_at)}
-        </IonBadge>
+        <IonBadge color="light">{formatDateTime(item.created_at)}</IonBadge>
       </article>
 
-      <IonButton onClick={() => isFunction(onRemove) && onRemove(item.id)} slot='end' color='drak' fill='clear' class='remove-button'>
-        <IonIcon icon={trashBinOutline} color='danger' slot='icon-only' />
+      <IonButton
+        onClick={() => isFunction(onRemove) && onRemove(item.id)}
+        slot="end"
+        color="drak"
+        fill="clear"
+        class="remove-button">
+        <IonIcon icon={trashBinOutline} color="danger" slot="icon-only" />
       </IonButton>
     </IonItem>
   )
