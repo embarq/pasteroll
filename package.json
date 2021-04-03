@@ -7,7 +7,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:ios": "ionic capacitor sync",
-    "format": "ts-standard src/ --fix"
+    "lint": "eslint src/ --fix",
+    "format": "prettier src/ --w"
   },
   "dependencies": {
     "@capacitor/core": "2.4.7",
@@ -48,7 +49,11 @@
   },
   "devDependencies": {
     "@capacitor/cli": "2.4.7",
-    "ts-standard": "^10.0.0"
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-react": "^7.23.1"
   },
   "private": true,
   "description": "An Ionic project",
@@ -69,9 +74,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "ts-standard": {
-    "project": "./tsconfig.json",
-    "files": ["src"]
   }
 }
