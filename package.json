@@ -1,7 +1,14 @@
 {
   "name": "pasteroll",
   "version": "0.1.2",
-  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build:ios": "ionic capacitor sync",
+    "format": "ts-standard src/ --fix"
+  },
   "dependencies": {
     "@capacitor/core": "2.4.7",
     "@capacitor/ios": "^2.4.7",
@@ -39,12 +46,12 @@
     "workbox-strategies": "^5.1.4",
     "workbox-streams": "^5.1.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "@capacitor/cli": "2.4.7",
+    "ts-standard": "^10.0.0"
   },
+  "private": true,
+  "description": "An Ionic project",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -63,12 +70,8 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@capacitor/cli": "2.4.7",
-    "ts-standard": "^10.0.0"
-  },
-  "description": "An Ionic project",
   "ts-standard": {
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
+    "files": ["src"]
   }
 }
