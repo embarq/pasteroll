@@ -7,11 +7,11 @@ import { ClipboardItem } from '../model'
 
 interface ClipboardItemsListItemProps {
   item: ClipboardItem
-  onRemove?: (itemId: string) => any
-  onClick?: (itemId: string) => any
+  onRemove?: (itemId: string) => unknown
+  onClick?: (itemId: string) => unknown
 }
 
-const ClipboardItemsListItem: React.FC<ClipboardItemsListItemProps> = ({ item, onRemove, onClick }) => {
+const ClipboardItemsListItem: React.FC<ClipboardItemsListItemProps> = ({ item, onRemove, onClick }: ClipboardItemsListItemProps) => {
   const handleClick: MouseEventHandler<HTMLIonItemElement> = (event) => {
     const isRemoveBtnClick = (event.target as HTMLElement).classList.contains('remove-button')
 

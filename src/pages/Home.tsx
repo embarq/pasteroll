@@ -22,10 +22,11 @@ const Home: React.FC = () => {
       <ClipboardItemsListItem key={item.id} item={item} onRemove={handleRemove} onClick={handleItemClick} />
     ))
 
-  function handleItemClick (itemId: string) {
+  function handleItemClick (itemId: string): void {
     const item = items.find(item => item.value.id === itemId)
 
     if (item != null) {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       Plugins.Clipboard.write({
         string: item.content.value
       })
@@ -33,7 +34,7 @@ const Home: React.FC = () => {
     }
   }
 
-  function handleRemove (itemId: string) {
+  function handleRemove (itemId: string): void {
     const ix = items.findIndex(item => item.value.id === itemId)
 
     if (ix > -1) {
@@ -44,7 +45,7 @@ const Home: React.FC = () => {
     }
   }
 
-  function undoRemoveItem () {
+  function undoRemoveItem (): void {
     if (removedItem != null) {
       items.merge([removedItem])
       setRemovedItem(null)

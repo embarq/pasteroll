@@ -6,7 +6,7 @@ const ClipboardNotSupported: React.FC = () => (
       <IonCardTitle>🤔 Clipboard is not supported on your device</IonCardTitle>
     </IonCardHeader>
     <IonCardContent>
-      <p>There's nothing we can do to help you,</p>
+      <p>There&quot;s nothing we can do to help you,</p>
       <p>so this app is useless I suppose...</p>
       <p>Have a good time tho!</p>
     </IonCardContent>

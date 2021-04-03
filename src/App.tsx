@@ -13,7 +13,7 @@ const App: React.FC = () => {
         <IonContent>
           <IonList>
             <IonItem>
-              What's up?
+              What&quot;s up?
             </IonItem>
           </IonList>
         </IonContent>

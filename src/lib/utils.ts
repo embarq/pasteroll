@@ -1,7 +1,8 @@
-export function isString (value: any): value is string {
+export function isString (value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0
 }
 
-export function isFunction (value: any): value is Function {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function isFunction (value: unknown): value is Function {
   return typeof value === 'function'
 }
